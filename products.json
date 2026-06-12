@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": "prod_example_001",
+      "name": "منتج تجريبي",
+      "price": 199,
+      "originalPrice": 250,
+      "discount": 20,
+      "description": "هذا منتج تجريبي لاختبار المتجر. يمكنك حذفه من لوحة التحكم.",
+      "image": "https://placehold.co/600x600/1a1a2e/ffffff?text=منتج",
+      "category": "عام",
+      "featured": true,
+      "stock": 10,
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "orders": [],
+  "categories": ["عام", "إلكترونيات", "ملابس", "أغذية", "أخرى"],
+  "settings": {
+    "storeName": "AboElfadl Store",
+    "currency": "ج.م",
+    "adminUser": "admin"
+  }
+}

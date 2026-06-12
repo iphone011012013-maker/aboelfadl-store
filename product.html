@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تفاصيل المنتج — AboElfadl Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#0d0d14; --surface:#16161f; --card:#1e1e2e;
+      --border:#2a2a3d; --accent:#6c63ff; --accent2:#ff6584;
+      --gold:#ffd700; --text:#e8e8f0; --muted:#8888aa; --radius:14px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+    .logo{font-size:1.4rem;font-weight:900;color:var(--accent);text-decoration:none;}
+    .logo span{color:var(--accent2);}
+    .back-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 18px;border-radius:50px;font-family:'Cairo',sans-serif;cursor:pointer;font-size:.9rem;transition:.2s;}
+    .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+    .container{max-width:960px;margin:40px auto;padding:0 24px;}
+    .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+    @media(max-width:680px){.product-grid{grid-template-columns:1fr;}}
+
+    /* IMAGE */
+    .img-wrap{background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);position:relative;}
+    .img-wrap img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+    .badge-discount{position:absolute;top:12px;right:12px;background:var(--accent2);color:#fff;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:50px;}
+    .badge-featured{position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:50px;}
+
+    /* INFO */
+    .info-cat{color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:8px;}
+    .info-name{font-size:1.8rem;font-weight:900;line-height:1.3;margin-bottom:16px;}
+    .info-prices{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+    .info-price-now{font-size:2rem;font-weight:900;color:var(--accent);}
+    .info-price-old{font-size:1.1rem;color:var(--muted);text-decoration:line-through;}
+    .info-save{background:rgba(255,101,132,.15);color:var(--accent2);font-size:.85rem;font-weight:700;padding:4px 12px;border-radius:50px;}
+
+    .info-desc{color:var(--muted);line-height:1.8;margin-bottom:24px;font-size:.98rem;}
+
+    .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .qty-label{font-size:.9rem;color:var(--muted);}
+    .qty-ctrl{display:flex;align-items:center;gap:0;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+    .qty-ctrl button{background:none;border:none;color:var(--text);width:38px;height:38px;font-size:1.2rem;cursor:pointer;transition:.15s;}
+    .qty-ctrl button:hover{background:var(--border);}
+    .qty-ctrl span{min-width:38px;text-align:center;font-weight:700;}
+
+    .add-btn{width:100%;padding:16px;background:var(--accent);border:none;border-radius:var(--radius);color:#fff;font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;transition:.2s;margin-bottom:12px;}
+    .add-btn:hover{background:#7c74ff;}
+    .share-btn{width:100%;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Cairo',sans-serif;font-size:.95rem;cursor:pointer;transition:.2s;}
+    .share-btn:hover{border-color:var(--accent);}
+
+    .meta{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+    .meta-row{display:flex;justify-content:space-between;font-size:.88rem;padding:8px 0;border-bottom:1px solid var(--border);}
+    .meta-row:last-child{border-bottom:none;}
+    .meta-key{color:var(--muted);}
+    .meta-val{font-weight:600;}
+    .stock-ok{color:#4ade80;}
+    .stock-no{color:var(--accent2);}
+
+    /* RELATED */
+    .related{margin-top:56px;}
+    .section-title{font-size:1.2rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.25s;}
+    .card:hover{transform:translateY(-3px);border-color:var(--accent);}
+    .card img{width:100%;aspect-ratio:1/1;object-fit:cover;}
+    .card-body{padding:12px;}
+    .card-name{font-size:.9rem;font-weight:700;margin-bottom:6px;}
+    .card-price{color:var(--accent);font-weight:900;}
+
+    /* LOADING */
+    .spinner{text-align:center;padding:80px;color:var(--muted);}
+    .spin{display:inline-block;width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--accent);color:#fff;padding:12px 24px;border-radius:50px;font-weight:700;z-index:999;transition:.3s;white-space:nowrap;}
+    .toast.show{transform:translateX(-50%) translateY(0);}
+
+    footer{text-align:center;padding:32px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;margin-top:40px;}
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">AboElfadl<span>Store</span></a>
+  <button class="back-btn" onclick="history.back()">← رجوع</button>
+</header>
+
+<div class="container">
+  <div id="productWrap">
+    <div class="spinner"><div class="spin"></div><br>جاري تحميل المنتج...</div>
+  </div>
+  <div class="related" id="relatedSection" style="display:none">
+    <div class="section-title">🔁 منتجات مشابهة</div>
+    <div class="grid" id="relatedGrid"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 AboElfadl Media — جميع الحقوق محفوظة</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script>
+  let qty = 1;
+  let currentProduct = null;
+  let allProducts = [];
+
+  const params = new URLSearchParams(location.search);
+  const productId = params.get('id');
+
+  async function loadProduct() {
+    try {
+      const url = `https://raw.githubusercontent.com/${GITHUB_CONFIG.USERNAME}/${GITHUB_CONFIG.REPO}/refs/heads/${GITHUB_CONFIG.BRANCH}/products.json?t=${Date.now()}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      allProducts = data.products || [];
+    } catch {
+      try {
+        const res = await fetch(`products.json?t=${Date.now()}`);
+        const data = await res.json();
+        allProducts = data.products || [];
+      } catch { }
+    }
+
+    const p = allProducts.find(x => x.id === productId);
+    if (!p) {
+      document.getElementById('productWrap').innerHTML = '<div class="spinner">❌ المنتج غير موجود <br><br><a href="index.html" style="color:var(--accent)">← العودة للمتجر</a></div>';
+      return;
+    }
+    currentProduct = p;
+    document.title = `${p.name} — AboElfadl Store`;
+    renderProduct(p);
+
+    // Related
+    const related = allProducts.filter(x => x.category === p.category && x.id !== p.id).slice(0,4);
+    if (related.length) {
+      document.getElementById('relatedSection').style.display = 'block';
+      document.getElementById('relatedGrid').innerHTML = related.map(r => `
+        <div class="card" onclick="location.href='product.html?id=${r.id}'">
+          <img src="${r.image||'https://placehold.co/200x200'}" alt="${r.name}" loading="lazy"/>
+          <div class="card-body">
+            <div class="card-name">${r.name}</div>
+            <div class="card-price">${r.price} ج.م</div>
+          </div>
+        </div>`).join('');
+    }
+  }
+
+  function renderProduct(p) {
+    const disc = p.discount > 0 ? `<span class="badge-discount">-${p.discount}%</span>` : '';
+    const feat = p.featured ? '<span class="badge-featured">⭐ مميز</span>' : '';
+    const oldPriceHTML = p.originalPrice > p.price ? `<span class="info-price-old">${p.originalPrice} ج.م</span><span class="info-save">وفّر ${p.originalPrice-p.price} ج.م</span>` : '';
+    const stockClass = (p.stock||0) > 0 ? 'stock-ok' : 'stock-no';
+    const stockText = (p.stock||0) > 0 ? `متوفر (${p.stock} قطعة)` : 'غير متوفر';
+
+    document.getElementById('productWrap').innerHTML = `
+      <div class="product-grid">
+        <div class="img-wrap">
+          ${disc}${feat}
+          <img src="${p.image||'https://placehold.co/600x600/1e1e2e/666?text=صورة'}" alt="${p.name}"/>
+        </div>
+        <div>
+          <div class="info-cat">${p.category||'عام'}</div>
+          <div class="info-name">${p.name}</div>
+          <div class="info-prices">
+            <span class="info-price-now">${p.price} ج.م</span>
+            ${oldPriceHTML}
+          </div>
+          <div class="info-desc">${p.description||'لا يوجد وصف لهذا المنتج.'}</div>
+          <div class="qty-row">
+            <span class="qty-label">الكمية:</span>
+            <div class="qty-ctrl">
+              <button onclick="changeQty(-1)">−</button>
+              <span id="qtyDisplay">1</span>
+              <button onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+          <button class="add-btn" onclick="addToCart()">🛒 أضف للسلة</button>
+          <button class="share-btn" onclick="shareProduct()">🔗 مشاركة المنتج</button>
+          <div class="meta">
+            <div class="meta-row"><span class="meta-key">الفئة</span><span class="meta-val">${p.category||'عام'}</span></div>
+            <div class="meta-row"><span class="meta-key">الحالة</span><span class="meta-val ${stockClass}">${stockText}</span></div>
+            <div class="meta-row"><span class="meta-key">رقم المنتج</span><span class="meta-val" style="font-size:.8rem;color:var(--muted)">${p.id}</span></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function changeQty(n) {
+    qty = Math.max(1, qty + n);
+    document.getElementById('qtyDisplay').textContent = qty;
+  }
+
+  function addToCart() {
+    if (!currentProduct) return;
+    let cart = JSON.parse(localStorage.getItem('aef_cart')||'[]');
+    const ex = cart.find(x => x.id === currentProduct.id);
+    if (ex) ex.qty = (ex.qty||1) + qty;
+    else cart.push({ id:currentProduct.id, name:currentProduct.name, price:currentProduct.price, image:currentProduct.image, qty });
+    localStorage.setItem('aef_cart', JSON.stringify(cart));
+    showToast(`✅ أُضيف ${qty} قطعة من "${currentProduct.name}"`);
+  }
+
+  function shareProduct() {
+    if (navigator.share) {
+      navigator.share({ title: currentProduct.name, url: location.href });
+    } else {
+      navigator.clipboard.writeText(location.href);
+      showToast('📋 تم نسخ رابط المنتج');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show';
+    setTimeout(() => t.className='toast', 3000);
+  }
+
+  loadProduct();
+</script>
+</body>
+</html>
