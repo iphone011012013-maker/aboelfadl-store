@@ -1,0 +1,4 @@
+عاوزه اعمل فكره مشروع بلغه html هيتم رفعه على github فكرته انشاء موقع لمتجر الكتروني انا للمخيلاتي هيتكون من كود admin.html وكود store.html كود admin.html مسؤول عن السماح للادمن باضافه منتجات علي كود store.html عن طريق انشاء ملف product1.html وملف كود store.html يعرضوا ويمكن من خلال كود store.html عرض منتج ملف product1.html 
+و كود store.html هو كود index.html وانا هربوط GitHub ب منصه netlify.app وهيكون الرابط 
+https://aboelfadl-store.netlify.app/
+وبهذا الطريقه تكون عملت متجر الكتروني احترافي اسمح لي بانشاء المنتجات عن طريق صفحه الادمن admin.html
