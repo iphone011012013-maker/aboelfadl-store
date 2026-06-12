@@ -23,7 +23,7 @@ const GITHUB_CONFIG = {
   //   3. اضغط "Generate token"
   //   4. الصق التوكن هنا
   // ⚠️ تحذير: لا تشاركه مع أحد!
-  TOKEN: "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",
+  TOKEN: "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",
 };
 
 // ============================================================
